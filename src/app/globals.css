@@ -1,26 +1,169 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --wine: #642f39;
+  --rose: #a44e59;
+  --rose-light: #edc8c8;
+  --blush: #f6e4e1;
+  --sand: #fbf6ef;
+  --cream: #fffdf9;
+  --line: #eadbd5;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-manrope);
+  --font-serif: var(--font-cormorant);
+  --color-wine: var(--wine);
+  --color-rose: var(--rose);
+  --color-rose-light: var(--rose-light);
+  --color-blush: var(--blush);
+  --color-sand: var(--sand);
+  --color-cream: var(--cream);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* { box-sizing: border-box; }
+
+html {
+  overflow-x: clip;
+  scroll-padding-top: 6rem;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  overflow-x: clip;
+  background: #fffdf9;
+  color: #642f39;
+  font-family: var(--font-manrope), Arial, sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+::selection { background: #e8bcbc; color: #55252f; }
+a, button, summary { -webkit-tap-highlight-color: transparent; }
+a:focus-visible, button:focus-visible, summary:focus-visible {
+  outline: 3px solid #c66f79;
+  outline-offset: 3px;
+}
+
+.container-shell {
+  width: min(100% - 2rem, 1180px);
+  margin-inline: auto;
+}
+
+.section-space { padding-block: clamp(5rem, 9vw, 8rem); }
+.hero-bg { background: linear-gradient(135deg, #fffaf4 0%, #f8e9e4 46%, #eac7c8 100%); }
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: .58rem;
+  color: #a44e59;
+  font-size: .73rem;
+  font-weight: 800;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+
+.eyebrow::before {
+  width: 1.9rem;
+  height: 2px;
+  border-radius: 999px;
+  background: currentColor;
+  content: "";
+}
+
+.section-title {
+  max-width: 790px;
+  margin-top: 1rem;
+  color: #642f39;
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-size: clamp(2.65rem, 5vw, 4.5rem);
+  font-weight: 600;
+  letter-spacing: -.045em;
+  line-height: 1;
+}
+
+.glass {
+  border: 1px solid rgba(255, 255, 255, .78);
+  background: rgba(255, 253, 249, .84);
+  box-shadow: 0 18px 60px rgba(91, 40, 48, .09);
+  backdrop-filter: blur(18px);
+}
+
+.soft-card {
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, .9);
+  box-shadow: 0 16px 45px rgba(91, 40, 48, .06);
+  transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+}
+
+.soft-card:hover {
+  border-color: rgba(164, 78, 89, .32);
+  box-shadow: 0 22px 55px rgba(91, 40, 48, .1);
+  transform: translateY(-5px);
+}
+
+.benefit-card {
+  min-height: 180px;
+  padding: 1.35rem;
+  border: 1px solid var(--line);
+  border-radius: 1.6rem;
+  background: #fffdfb;
+  box-shadow: 0 14px 35px rgba(91, 40, 48, .055);
+  transition: transform .35s ease, box-shadow .35s ease;
+}
+
+.benefit-card:hover { transform: translateY(-5px); box-shadow: 0 20px 45px rgba(91, 40, 48, .1); }
+
+.button-primary, .button-secondary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .75rem;
+  padding: 1rem 1.75rem;
+  border-radius: 999px;
+  font-size: .875rem;
+  font-weight: 800;
+  transition: transform .25s ease, background .25s ease, color .25s ease;
+}
+
+.button-primary {
+  background: #642f39;
+  color: white;
+  box-shadow: 0 18px 38px rgba(91, 40, 48, .2);
+}
+
+.button-primary:hover { background: #a44e59; transform: translateY(-3px); }
+.button-secondary { border: 1px solid rgba(100, 47, 57, .15); background: rgba(255, 255, 255, .65); color: #642f39; backdrop-filter: blur(8px); }
+.button-secondary:hover { background: white; transform: translateY(-3px); }
+
+.dot-pattern {
+  background-image: radial-gradient(rgba(136, 66, 76, .16) 1px, transparent 1px);
+  background-size: 19px 19px;
+}
+
+summary::-webkit-details-marker { display: none; }
+details[open].soft-card { transform: none; }
+
+.legal-copy h2 {
+  margin-bottom: .55rem;
+  color: #642f39;
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-size: 1.75rem;
+  font-weight: 600;
+  letter-spacing: -.025em;
+}
+
+@media (max-width: 640px) {
+  .container-shell { width: min(100% - 1.25rem, 1180px); }
+  .benefit-card { min-height: 155px; padding: 1rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
 }
