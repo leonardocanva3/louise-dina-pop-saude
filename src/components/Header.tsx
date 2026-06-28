@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { Menu, X } from "lucide-react";
-import { useEffect, useState } from "react";
+import { Component, useEffect, useState, type ErrorInfo, type ReactNode } from "react";
 import { FaWhatsapp } from "react-icons/fa";
 import { site } from "@/lib/site";
 
@@ -14,7 +14,60 @@ const links = [
   ["Contato", "#contato"],
 ];
 
-export function Header() {
+class HeaderBoundary extends Component<{ children: ReactNode }, { failed: boolean }> {
+  state = { failed: false };
+
+  static getDerivedStateFromError() {
+    return { failed: true };
+  }
+
+  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+    if (process.env.NODE_ENV === "development") {
+      console.error("Interactive header failed; rendering static header.", error, errorInfo);
+    }
+  }
+
+  render() {
+    return this.state.failed ? <StaticHeader /> : this.props.children;
+  }
+}
+
+function BrandLogo() {
+  return (
+    <Image
+      src="/images/logo-louise-dina-optimized.png"
+      alt="Louise Diná Psicóloga"
+      width={400}
+      height={234}
+      sizes="(max-width: 640px) 110px, 125px"
+      loading="lazy"
+      className="h-[3.6rem] w-auto sm:h-[4rem]"
+    />
+  );
+}
+
+function StaticHeader() {
+  return (
+    <header className="fixed inset-x-0 top-0 z-50 px-2 pt-2 sm:px-4 sm:pt-4">
+      <div className="glass mx-auto flex h-[4.6rem] max-w-[1240px] items-center justify-between rounded-[1.5rem] px-4 sm:px-6">
+        <a href="#inicio" aria-label="Louise Diná — início">
+          <BrandLogo />
+        </a>
+        <a
+          href={site.whatsapp}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-2 rounded-full bg-wine px-4 py-3 text-sm font-extrabold text-white"
+        >
+          <FaWhatsapp className="text-lg" />
+          <span className="hidden sm:inline">Agendar consulta</span>
+        </a>
+      </div>
+    </header>
+  );
+}
+
+function InteractiveHeader() {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -28,15 +81,7 @@ export function Header() {
       <div className="glass mx-auto max-w-[1240px] rounded-[1.5rem] px-3 sm:px-5 lg:px-6">
         <div className="flex h-[4.6rem] items-center justify-between gap-3">
           <a href="#inicio" className="flex shrink-0 items-center" aria-label="Louise Diná — início">
-            <Image
-              src="/images/logo-louise-dina-optimized.png"
-              alt="Louise Diná Psicóloga"
-              width={400}
-              height={234}
-              sizes="(max-width: 640px) 110px, 125px"
-              loading="lazy"
-              className="h-[3.6rem] w-auto sm:h-[4rem]"
-            />
+            <BrandLogo />
           </a>
 
           <nav className="hidden items-center gap-6 xl:flex" aria-label="Navegação principal">
@@ -95,5 +140,13 @@ export function Header() {
         )}
       </div>
     </header>
+  );
+}
+
+export function Header() {
+  return (
+    <HeaderBoundary>
+      <InteractiveHeader />
+    </HeaderBoundary>
   );
 }

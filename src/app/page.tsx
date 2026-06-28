@@ -77,12 +77,12 @@ export default function Home() {
       <JsonLd data={structuredData} />
       <Header />
       <main>
-        <section id="inicio" className="hero-bg relative flex min-h-[780px] items-center overflow-hidden pt-28 sm:pt-32 lg:min-h-[850px]">
-          <div className="dot-pattern absolute inset-y-0 left-0 w-1/3 opacity-50" />
-          <div className="absolute -left-24 top-52 size-72 rounded-full bg-white/60 blur-3xl" />
-          <div className="absolute -right-36 top-16 size-[34rem] rounded-full bg-rose/15 blur-3xl" />
+        <section id="inicio" className="hero-bg relative isolate flex min-h-[780px] items-center overflow-hidden pt-28 sm:pt-32 lg:min-h-[850px]">
+          <div aria-hidden="true" className="dot-pattern pointer-events-none absolute inset-y-0 left-0 z-0 w-1/3 opacity-50" />
+          <div aria-hidden="true" className="pointer-events-none absolute -left-24 top-52 z-0 size-72 rounded-full bg-white/60 blur-3xl" />
+          <div aria-hidden="true" className="pointer-events-none absolute -right-36 top-16 z-0 size-[34rem] rounded-full bg-rose/15 blur-3xl" />
           <div className="container-shell relative z-10 grid items-center gap-12 py-12 lg:grid-cols-[1.04fr_.96fr] lg:gap-12 lg:py-20">
-            <Reveal>
+            <div className="relative z-20 opacity-100 visible">
               <div className="mb-6 flex flex-wrap items-center gap-3">
                 <span className="inline-flex items-center gap-2 rounded-full border border-white/80 bg-white/70 px-4 py-2 text-xs font-extrabold tracking-[0.12em] text-wine uppercase shadow-sm backdrop-blur">
                   <HeartPulse size={15} className="text-rose" /> Psicóloga em Salvador
@@ -108,11 +108,11 @@ export default function Home() {
                   </div>
                 ))}
               </div>
-            </Reveal>
-            <Reveal delay={0.12} className="relative mx-auto w-full max-w-[540px]">
-              <div className="absolute inset-x-8 bottom-0 top-16 rounded-[46%_46%_2.8rem_2.8rem] bg-gradient-to-b from-[#ddaaa8] to-[#8d3e49] shadow-[0_40px_90px_rgba(91,40,48,.22)]" />
-              <div className="absolute inset-x-3 bottom-4 top-10 rounded-[48%_48%_3.2rem_3.2rem] border border-white/60" />
-              <div className="relative aspect-[4/5] overflow-hidden">
+            </div>
+            <div className="relative z-10 mx-auto w-full max-w-[540px] opacity-100 visible">
+              <div aria-hidden="true" className="absolute inset-x-8 bottom-0 top-16 z-0 rounded-[46%_46%_2.8rem_2.8rem] bg-gradient-to-b from-[#ddaaa8] to-[#8d3e49] shadow-[0_40px_90px_rgba(91,40,48,.22)]" />
+              <div aria-hidden="true" className="absolute inset-x-3 bottom-4 top-10 z-0 rounded-[48%_48%_3.2rem_3.2rem] border border-white/60" />
+              <div className="relative z-10 aspect-[4/5] overflow-hidden">
                 <Image
                   src="/images/louise-hero.webp"
                   alt="Louise Diná, psicóloga em Salvador"
@@ -123,14 +123,14 @@ export default function Home() {
                   className="object-contain object-bottom"
                 />
               </div>
-              <div className="glass absolute -bottom-5 left-0 flex max-w-[270px] items-center gap-3 rounded-2xl p-3.5 sm:-left-6 sm:p-4">
+              <div className="glass absolute -bottom-5 left-0 z-20 flex max-w-[270px] items-center gap-3 rounded-2xl p-3.5 sm:-left-6 sm:p-4">
                 <span className="flex size-11 shrink-0 items-center justify-center rounded-full bg-blush text-rose"><ShieldCheck size={22} /></span>
                 <span className="text-xs leading-5 font-bold text-wine">Acolhimento, ética e sigilo em cada encontro.</span>
               </div>
-              <div className="absolute -right-1 top-16 rounded-2xl bg-wine px-4 py-3 text-white shadow-xl sm:-right-5">
+              <div className="absolute -right-1 top-16 z-20 rounded-2xl bg-wine px-4 py-3 text-white shadow-xl sm:-right-5">
                 <span className="block text-[0.58rem] font-bold tracking-[0.16em] text-white/60 uppercase">Abordagem</span><strong className="text-sm">TCC</strong>
               </div>
-            </Reveal>
+            </div>
           </div>
         </section>
 

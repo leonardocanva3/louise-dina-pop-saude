@@ -1,28 +1,79 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { Component, useEffect, type ErrorInfo, type ReactNode } from "react";
+import { useAnimate, useInView, useReducedMotion } from "framer-motion";
 
-export function Reveal({
-  children,
-  className = "",
-  delay = 0,
-}: {
-  children: React.ReactNode;
+type RevealProps = {
+  children: ReactNode;
   className?: string;
   delay?: number;
-}) {
+};
+
+type RevealBoundaryState = {
+  failed: boolean;
+};
+
+class RevealBoundary extends Component<RevealProps, RevealBoundaryState> {
+  state: RevealBoundaryState = { failed: false };
+
+  static getDerivedStateFromError(): RevealBoundaryState {
+    return { failed: true };
+  }
+
+  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+    if (process.env.NODE_ENV === "development") {
+      console.error("Reveal animation failed; rendering static content.", error, errorInfo);
+    }
+  }
+
+  render() {
+    const { children, className = "", delay = 0 } = this.props;
+
+    if (this.state.failed) {
+      return (
+        <div className={className} style={{ opacity: 1, visibility: "visible" }}>
+          {children}
+        </div>
+      );
+    }
+
+    return (
+      <AnimatedReveal className={className} delay={delay}>
+        {children}
+      </AnimatedReveal>
+    );
+  }
+}
+
+function AnimatedReveal({ children, className = "", delay = 0 }: RevealProps) {
+  const [scope, animate] = useAnimate<HTMLDivElement>();
+  const isInView = useInView(scope, { once: true, amount: 0.14 });
   const reducedMotion = useReducedMotion();
 
+  useEffect(() => {
+    if (!isInView || reducedMotion) return;
+
+    try {
+      const controls = animate(
+        scope.current,
+        { y: [18, 0] },
+        { duration: 0.7, delay, ease: [0.21, 0.8, 0.35, 1] },
+      );
+
+      return () => controls.stop();
+    } catch {
+      // Animation is optional. The server-rendered content remains visible.
+      return;
+    }
+  }, [animate, delay, isInView, reducedMotion, scope]);
+
   return (
-    <motion.div
-      className={className}
-      initial={reducedMotion ? false : { opacity: 0, y: 28 }}
-      whileInView={reducedMotion ? undefined : { opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.14 }}
-      transition={{ duration: 0.7, delay, ease: [0.21, 0.8, 0.35, 1] }}
-    >
+    <div ref={scope} className={className} style={{ opacity: 1, visibility: "visible" }}>
       {children}
-    </motion.div>
+    </div>
   );
 }
 
+export function Reveal(props: RevealProps) {
+  return <RevealBoundary {...props} />;
+}
