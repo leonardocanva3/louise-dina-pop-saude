@@ -113,7 +113,15 @@ export default function Home() {
               <div className="absolute inset-x-8 bottom-0 top-16 rounded-[46%_46%_2.8rem_2.8rem] bg-gradient-to-b from-[#ddaaa8] to-[#8d3e49] shadow-[0_40px_90px_rgba(91,40,48,.22)]" />
               <div className="absolute inset-x-3 bottom-4 top-10 rounded-[48%_48%_3.2rem_3.2rem] border border-white/60" />
               <div className="relative aspect-[4/5] overflow-hidden">
-                <Image src="/images/louise-hero.webp" alt="Louise Diná, psicóloga em Salvador" fill priority sizes="(max-width: 1024px) 90vw, 540px" className="object-contain object-bottom" />
+                <Image
+                  src="/images/louise-hero.webp"
+                  alt="Louise Diná, psicóloga em Salvador"
+                  fill
+                  preload
+                  quality={80}
+                  sizes="(max-width: 640px) calc(100vw - 1.25rem), 540px"
+                  className="object-contain object-bottom"
+                />
               </div>
               <div className="glass absolute -bottom-5 left-0 flex max-w-[270px] items-center gap-3 rounded-2xl p-3.5 sm:-left-6 sm:p-4">
                 <span className="flex size-11 shrink-0 items-center justify-center rounded-full bg-blush text-rose"><ShieldCheck size={22} /></span>
@@ -130,7 +138,14 @@ export default function Home() {
           <div className="container-shell grid items-center gap-14 lg:grid-cols-[.9fr_1.1fr] lg:gap-20">
             <Reveal className="relative order-2 lg:order-1">
               <div className="relative aspect-[4/5] overflow-hidden rounded-[2.7rem] bg-blush shadow-[0_30px_80px_rgba(91,40,48,.14)]">
-                <Image src="/images/louise-sobre.webp" alt="Retrato profissional da psicóloga Louise Diná" fill sizes="(max-width: 1024px) 90vw, 500px" className="object-cover object-top" />
+                <Image
+                  src="/images/louise-sobre.webp"
+                  alt="Retrato profissional da psicóloga Louise Diná"
+                  fill
+                  loading="lazy"
+                  sizes="(max-width: 640px) calc(100vw - 1.25rem), (max-width: 1023px) calc(100vw - 2rem), 500px"
+                  className="object-cover object-top"
+                />
               </div>
               <div className="absolute -bottom-7 -right-1 max-w-[290px] rounded-3xl bg-wine p-5 text-white shadow-2xl sm:-right-8 sm:p-6">
                 <Quote size={27} className="mb-3 text-rose-light" />
@@ -203,7 +218,14 @@ export default function Home() {
             </Reveal>
             <Reveal delay={0.1} className="relative">
               <div className="relative aspect-[3/4] overflow-hidden rounded-[2.8rem] border border-white/15 bg-white/5">
-                <Image src="/images/louise-tcc.webp" alt="Louise Diná com livro sobre Terapia Cognitiva" fill sizes="(max-width: 1024px) 90vw, 500px" className="object-cover object-top" />
+                <Image
+                  src="/images/louise-tcc.webp"
+                  alt="Louise Diná com livro sobre Terapia Cognitiva"
+                  fill
+                  loading="lazy"
+                  sizes="(max-width: 640px) calc(100vw - 1.25rem), (max-width: 1023px) calc(100vw - 2rem), 500px"
+                  className="object-cover object-top"
+                />
               </div>
               <div className="absolute -bottom-5 -left-3 rounded-2xl bg-rose-light p-5 text-wine shadow-2xl sm:-left-8"><Brain size={28} /><strong className="mt-2 block text-sm">Pensamentos · Emoções · Ações</strong></div>
             </Reveal>
@@ -236,8 +258,16 @@ export default function Home() {
               ["/images/louise-retrato.webp", "Retrato profissional de Louise Diná"],
               ["/images/louise-cta.webp", "Louise Diná sorrindo"],
             ].map(([src, alt], index) => (
-              <Reveal key={src} delay={index * 0.05} className="relative min-h-[340px] overflow-hidden rounded-[2rem] bg-blush">
-                <Image src={src} alt={alt} fill sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw" className="object-cover object-top transition duration-700 hover:scale-[1.03]" />
+              <Reveal key={alt} delay={index * 0.05} className="relative min-h-[340px] overflow-hidden rounded-[2rem] bg-blush">
+                <Image
+                  src={src}
+                  alt={alt}
+                  fill
+                  loading="lazy"
+                  quality={70}
+                  sizes="(max-width: 640px) calc(100vw - 1.25rem), (max-width: 1023px) calc((100vw - 3rem) / 2), 283px"
+                  className="object-cover object-top transition duration-700 hover:scale-[1.03]"
+                />
               </Reveal>
             ))}
           </div>
@@ -275,7 +305,14 @@ export default function Home() {
                 <a href={site.whatsapp} target="_blank" rel="noopener noreferrer" className="mt-8 inline-flex w-fit items-center gap-3 rounded-full bg-rose-light px-7 py-4 text-sm font-extrabold text-wine transition hover:-translate-y-1 hover:bg-white"><FaWhatsapp className="text-xl" /> Agendar pelo WhatsApp <ArrowRight size={17} /></a>
               </Reveal>
               <Reveal delay={0.08} className="relative min-h-[500px] lg:min-h-[650px]">
-                <Image src="/images/louise-poltrona.webp" alt="Louise Diná em seu espaço de atendimento" fill sizes="(max-width: 1024px) 100vw, 480px" className="object-contain object-bottom" />
+                <Image
+                  src="/images/louise-poltrona.webp"
+                  alt="Louise Diná em seu espaço de atendimento"
+                  fill
+                  loading="lazy"
+                  sizes="(max-width: 640px) calc(100vw - 1.25rem), (max-width: 1023px) calc(100vw - 2rem), 480px"
+                  className="object-contain object-bottom"
+                />
                 <div className="absolute inset-0 bg-gradient-to-t from-wine/35 via-transparent to-transparent lg:bg-gradient-to-r lg:from-wine/25 lg:to-transparent" />
               </Reveal>
             </div>
@@ -320,7 +357,15 @@ export default function Home() {
       <footer className="border-t border-wine/10 bg-sand py-12">
         <div className="container-shell grid gap-10 lg:grid-cols-[1.3fr_.7fr_.8fr]">
           <div>
-            <Image src="/images/logo-louise-dina-optimized.png" alt="Louise Diná Psicóloga" width={720} height={421} className="h-24 w-auto" />
+            <Image
+              src="/images/logo-louise-dina-optimized.png"
+              alt="Louise Diná Psicóloga"
+              width={400}
+              height={234}
+              sizes="165px"
+              loading="lazy"
+              className="h-24 w-auto"
+            />
             <p className="mt-3 max-w-sm text-sm leading-7 text-wine/60">Psicoterapia com acolhimento e base na Terapia Cognitivo-Comportamental em Salvador.</p>
             <strong className="mt-3 block text-sm text-wine">{site.crp}</strong>
           </div>

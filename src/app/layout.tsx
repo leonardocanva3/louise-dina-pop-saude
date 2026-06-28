@@ -41,13 +41,13 @@ export const metadata: Metadata = {
     siteName: "Louise Diná Psicóloga",
     title: "Louise Diná | Psicóloga em Salvador",
     description: "Psicoterapia acolhedora e Terapia Cognitivo-Comportamental em Salvador.",
-    images: [{ url: "/opengraph-image.png", width: 1200, height: 630, alt: "Louise Diná, psicóloga em Salvador" }],
+    images: [{ url: "/opengraph-image.jpg", width: 1200, height: 630, alt: "Louise Diná, psicóloga em Salvador" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Louise Diná | Psicóloga em Salvador",
     description: "Psicoterapia acolhedora e Terapia Cognitivo-Comportamental em Salvador.",
-    images: ["/opengraph-image.png"],
+    images: ["/opengraph-image.jpg"],
   },
   robots: {
     index: true,
@@ -77,4 +77,3 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     </html>
   );
 }
-

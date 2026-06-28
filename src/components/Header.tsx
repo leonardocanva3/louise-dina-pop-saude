@@ -31,10 +31,11 @@ export function Header() {
             <Image
               src="/images/logo-louise-dina-optimized.png"
               alt="Louise Diná Psicóloga"
-              width={720}
-              height={421}
+              width={400}
+              height={234}
+              sizes="(max-width: 640px) 110px, 125px"
+              loading="lazy"
               className="h-[3.6rem] w-auto sm:h-[4rem]"
-              priority
             />
           </a>
 

@@ -19,7 +19,15 @@ export function LegalPage({
           <ArrowLeft size={17} /> Voltar ao início
         </Link>
         <article className="mx-auto mt-8 max-w-4xl rounded-[2.5rem] border border-wine/10 bg-white p-6 shadow-[0_24px_70px_rgba(91,40,48,.08)] sm:p-12">
-          <Image src="/images/logo-louise-dina-optimized.png" alt="Louise Diná Psicóloga" width={720} height={421} className="h-24 w-auto" />
+          <Image
+            src="/images/logo-louise-dina-optimized.png"
+            alt="Louise Diná Psicóloga"
+            width={400}
+            height={234}
+            sizes="165px"
+            loading="lazy"
+            className="h-24 w-auto"
+          />
           <span className="eyebrow mt-8">{eyebrow}</span>
           <h1 className="section-title">{title}</h1>
           <div className="legal-copy mt-9 space-y-7 text-sm leading-7 text-wine/70 sm:text-base">{children}</div>
